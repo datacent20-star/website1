@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="news">
+    <div class="container">
+        <h1>Новини компанії</h1>
+        
+        <div class="news-grid">
+            {% if news_items %}
+                {% for news_item in news_items %}
+                <div class="news-card">
+                    <div class="news-image">
+                        <img src="{{ news_item[3] or url_for('static', filename='images/placeholder-news.jpg') }}" alt="{{ news_item[1] }}">
+                    </div>
+                    <div class="news-content">
+                        <span class="news-date">{{ news_item[4] }}</span>
+                        <h3>{{ news_item[1] }}</h3>
+                        <p>{{ news_item[2][:150] }}...</p>
+                        <a href="{{ url_for('news_item', news_id=news_item[0]) }}" class="btn-secondary">Читати далі</a>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p>Новини відсутні.</p>
+            {% endif %}
+        </div>
+        
+        {% if current_user.is_authenticated %}
+        <div class="admin-link">
+            <a href="{{ url_for('admin') }}" class="btn">Додати новину</a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

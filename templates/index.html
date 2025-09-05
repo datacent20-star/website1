@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero">
+    <div class="container">
+        <h2>Наші акційні пропозиції</h2>
+        <div class="services-grid">
+            {% if services %}
+                {% for service in services %}
+                <div class="service-card" data-service-id="{{ service[0] }}">
+                    <div class="service-image">
+                        {% if service[3] %}
+                            <img src="{{ service[3] }}" alt="{{ service[1] }}">
+                        {% else %}
+                            <div class="service-icon">
+                                <i class="fas fa-wifi"></i>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="service-content">
+                        <h3>{{ service[1] }}</h3>
+                        <p>{{ service[2] }}</p>
+                        <button class="btn service-btn">Замовити</button>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p>Послуги відсутні.</p>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+
+<section class="features">
+    <div class="container">
+        <h2>Наші переваги</h2>
+        <div class="features-grid">
+            <div class="feature">
+                <i class="fas fa-tachometer-alt"></i>
+                <h3>Висока швидкість</h3>
+                <p>До 1 Гбіт/с для комфортного користування</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Захист та безпека</h3>
+                <p>Надійний захист від загроз в інтернеті</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-headset"></i>
+                <h3>Цілодобова підтримка</h3>
+                <p>Наші фахівці завжди готові допомогти</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="news-preview">
+    <div class="container">
+        <h2>Останні новини</h2>
+        <div class="news-grid">
+            {% if news_items %}
+                {% for news_item in news_items %}
+                <div class="news-card">
+                    <div class="news-image">
+                        <img src="{{ news_item[3] or url_for('static', filename='images/placeholder-news.jpg') }}" alt="{{ news_item[1] }}">
+                    </div>
+                    <div class="news-content">
+                        <h3>{{ news_item[1] }}</h3>
+                        <p>{{ news_item[2][:100] }}...</p>
+                        <a href="{{ url_for('news_item', news_id=news_item[0]) }}" class="btn-secondary">Читати далі</a>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p>Новини відсутні.</p>
+            {% endif %}
+        </div>
+        <div class="center-button">
+            <a href="{{ url_for('news') }}" class="btn">Всі новини</a>
+        </div>
+    </div>
+</section>
+
+<!-- Модальное окно для формы -->
+<div class="modal" id="serviceModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 id="modalTitle">Замовлення послуги</h3>
+            <span class="close">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form id="serviceForm">
+                <div id="formFields"></div>
+                <button type="submit" class="btn">Відправити заявку</button>
+            </form>
+            <div id="formMessage" class="form-message"></div>
+        </div>
+    </div>
+</div>
+{% endblock %}

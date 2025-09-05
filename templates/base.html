@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Інтернет-провайдер</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo-container">
+                <a href="{{ url_for('index') }}" class="logo">
+                    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Логотип">
+                </a>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li class="dropdown">
+                        <a href="#">Оплата <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="#">Способи оплати</a>
+                            <a href="#">Турбоплатіж</a>
+                            <a href="#">Не надійшли кошти?</a>
+                        </div>
+                    </li>
+                    <li><a href="{{ url_for('tariffs') }}">Тарифи</a></li>
+                    <li><a href="{{ url_for('promotions') }}">Акції</a></li>
+                    <li class="dropdown">
+                        <a href="#">Послуги <i class="fas fa-chevron-down"></i></a>
+                        <div class="dropdown-content">
+                            <a href="https://service.fregat.com/">Фрегат Сервіс</a>
+                            <a href="#">Sweet TV</a>
+                            <a href="#">Послуга Ультра</a>
+                            <a href="#">Телепорт</a>
+                            <a href="#">Статична IP адреса</a>
+                            <a href="#">Консервація</a>
+                            <a href="#">Почекаймо</a>
+                            <a href="#">Програма подяки</a>
+                        </div>
+                    </li>
+                    <li><a href="{{ url_for('news') }}">Новини</a></li>
+                    <li class="dropdown">
+                        <a href="#">Про нас <i class="fas fa-chevron-down"></i></a>
+                        <li><a href="https://info.fregat.net/">Особистий Кабінет</a></li>
+                        <div class="dropdown-content">
+                            <a href="#">Про компанію, місія</a>
+                            <a href="#">Контакти</a>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="social-links">
+                    <h3>Слідкуйте за нами</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="callback-form">
+                    <h3>Зворотний дзвінок</h3>
+                    <form action="{{ url_for('callback') }}" method="POST">
+    <input type="tel" name="phone" placeholder="Ваш номер телефону" required>
+    <button type="submit">Зателефонуйте мені</button>
+</form>
+                </div>
+                
+                <div class="online-chat">
+                    <h3>Онлайн чат</h3>
+                    <button id="chat-toggle">Відкрити чат</button>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2222 Інтернет-провайдер. Всі права захищені.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="chat-window" id="chat-window">
+        <div class="chat-header">
+            <h3>Онлайн чат</h3>
+            <button id="chat-close"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="chat-messages">
+            <div class="message operator">
+                <p>Вітаємо! Чим можемо допомогти?</p>
+            </div>
+        </div>
+        <div class="chat-input">
+            <input type="text" placeholder="Введіть ваше повідомлення...">
+            <button><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

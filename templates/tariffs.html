@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="tariffs">
+    <div class="container">
+        <h1>Наші тарифи</h1>
+        
+        <div class="tariff-switcher">
+            <button class="tab-button {% if tariff_type == 'apartment' %}active{% endif %}" data-tab="apartment">Для квартири</button>
+            <button class="tab-button {% if tariff_type == 'house' %}active{% endif %}" data-tab="house">Для приватного будинку</button>
+        </div>
+        
+        <div class="tariff-content">
+            {% if tariff_type == 'apartment' %}
+            <div class="tariff-grid">
+                <div class="tariff-card">
+                    <h3>Базовий</h3>
+                    <div class="price">150 грн/міс</div>
+                    <ul>
+                        <li>Швидкість: 50 Мбіт/с</li>
+                        <li>Без обмежень трафіку</li>
+                        <li>Wi-Fi роутер в оренду</li>
+                    </ul>
+                    <a href="https://fregat.com/subscription-and-payment/connection-req/" class="btn">Підключити</a>
+                </div>
+                
+                <div class="tariff-card popular">
+                    <div class="popular-badge">Популярний</div>
+                    <h3>Стандарт</h3>
+                    <div class="price">250 грн/міс</div>
+                    <ul>
+                        <li>Швидкість: 100 Мбіт/с</li>
+                        <li>Без обмежень трафіку</li>
+                        <li>Wi-Fi роутер в оренду</li>
+                        <li>Статична IP адреса</li>
+                    </ul>
+                    <a href="https://fregat.com/subscription-and-payment/connection-req/" class="btn">Підключити</a>
+                </div>
+                
+                <div class="tariff-card">
+                    <h3>Преміум</h3>
+                    <div class="price">400 грн/міс</div>
+                    <ul>
+                        <li>Швидкість: 300 Мбіт/с</li>
+                        <li>Без обмежень трафіку</li>
+                        <li>Wi-Fi роутер в оренду</li>
+                        <li>Статична IP адреса</li>
+                        <li>Пріоритетне обслуговування</li>
+                    </ul>
+                    <a href="https://fregat.com/subscription-and-payment/connection-req/" class="btn">Підключити</a>
+                </div>
+            </div>
+            {% else %}
+            <div class="tariff-grid">
+                <div class="tariff-card">
+                    <h3>Сільский</h3>
+                    <div class="price">200 грн/міс</div>
+                    <ul>
+                        <li>Швидкість: 30 Мбіт/с</li>
+                        <li>Без обмежень трафіку</li>
+                        <li>Wi-Fi роутер в оренду</li>
+                    </ul>
+                    <a href="https://fregat.com/subscription-and-payment/connection-req/" class="btn">Підключити</a>
+                </div>
+                
+                <div class="tariff-card popular">
+                    <div class="popular-badge">Популярний</div>
+                    <h3>Заміський</h3>
+                    <div class="price">350 грн/міс</div>
+                    <ul>
+                        <li>Швидкість: 50 Мбіт/с</li>
+                        <li>Без обмежень трафіку</li>
+                        <li>Wi-Fi роутер в оренду</li>
+                        <li>Статична IP адреса</li>
+                    </ul>
+                    <a href="https://fregat.com/subscription-and-payment/connection-req/" class="btn">Підключити</a>
+                </div>
+                
+                <div class="tariff-card">
+                    <h3>Котеджний</h3>
+                    <div class="price">500 грн/міс</div>
+                    <ul>
+                        <li>Швидкість: 100 Мбіт/с</li>
+                        <li>Без обмежень трафіку</li>
+                        <li>Wi-Fi роутер в оренду</li>
+                        <li>Статична IP адреса</li>
+                        <li>Пріоритетне обслуговування</li>
+                    </ul>
+                    <a href="https://fregat.com/subscription-and-payment/connection-req/" class="btn">Підключити</a>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

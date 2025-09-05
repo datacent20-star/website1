@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="news-item">
+    <div class="container">
+        <article>
+            <div class="news-header">
+                <h1>{{ news_item[1] }}</h1>
+                <span class="news-date">{{ news_item[4] }}</span>
+            </div>
+            
+            {% if news_item[3] %}
+            <div class="news-image-full">
+                <img src="{{ news_item[3] }}" alt="{{ news_item[1] }}">
+            </div>
+            {% endif %}
+            
+            <div class="news-content-full">
+                {{ news_item[2] | safe }}
+            </div>
+            
+            <div class="news-navigation">
+                <a href="{{ url_for('news') }}" class="btn">До всіх новин</a>
+            </div>
+        </article>
+    </div>
+</section>
+{% endblock %}

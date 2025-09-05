@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="promotions">
+    <div class="container">
+        <h1>Акції та спецпропозиції</h1>
+        
+        <div class="promotions-grid">
+            <div class="promotion-card large">
+                <div class="promotion-image">
+                    <img src="{{ url_for('static', filename='images/promo-large1.jpg') }}" alt="Велика акція">
+                </div>
+                <div class="promotion-content">
+                    <h2>Підключення безкоштовно!</h2>
+                    <p>Діє до 31 грудня 2023 року. Умови акції: при підключенні тарифу "Стандарт" або вище, вартість підключення становить 0 грн.</p>
+                    <a href="#" class="btn">Скористатися пропозицією</a>
+                </div>
+            </div>
+            
+            <div class="promotion-card">
+                <div class="promotion-image">
+                    <img src="{{ url_for('static', filename='images/promo3.jpg') }}" alt="Акція 3">
+                </div>
+                <div class="promotion-content">
+                    <h3>+100 Мбіт/с безкоштовно</h3>
+                    <p>Для клієнтів тарифу "Преміум" - отримайте додаткові 100 Мбіт/с без зміни абонплати</p>
+                    <a href="#" class="btn-secondary">Детальніше</a>
+                </div>
+            </div>
+            
+            <div class="promotion-card">
+                <div class="promotion-image">
+                    <img src="{{ url_for('static', filename='images/promo4.jpg') }}" alt="Акція 4">
+                </div>
+                <div class="promotion-content">
+                    <h3>Переходь та отримуй знижку</h3>
+                    <p>При переході від іншого провайдера отримайте знижку 20% на перші 3 місяці</p>
+                    <a href="#" class="btn-secondary">Детальніше</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="connection-form">
+            <h2>Заявка на підключення</h2>
+            <form id="connectionForm">
+                <div class="form-row">
+                    <input type="text" name="name" placeholder="Ім'я" required>
+                    <input type="text" name="surname" placeholder="Прізвище" required>
+                </div>
+                <div class="form-row">
+                    <input type="tel" name="phone" placeholder="Телефон" required>
+                    <input type="email" name="email" placeholder="Email">
+                </div>
+                <div class="form-row">
+                     <input type="text" name="address" placeholder="Адреса" required>
+                     <select name="tariff" required>
+                         <option value="" disabled selected>Оберіть тариф</option>
+                         <option value="basic">Базовий</option>
+                         <option value="standard">Стандарт</option>
+                         <option value="premium">Преміум</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                     <textarea name="comment" placeholder="Коментар (необов'язково)"></textarea>
+                </div>
+                <button type="submit" class="btn">Відправити заявку</button>
+            </form>
+            <div id="formMessage" class="form-message"></div>
+  </div>
+  <script>
+document.getElementById('connectionForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    const data = Object.fromEntries(formData.entries());
+    
+    fetch('/submit_form/0', {  // 0 - для акций
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        const messageDiv = document.getElementById('formMessage');
+        if (data.success) {
+            messageDiv.textContent = data.message;
+            messageDiv.className = 'form-message success';
+            this.reset();
+        } else {
+            messageDiv.textContent = data.message;
+            messageDiv.className = 'form-message error';
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+});
+</script>
+</section>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="admin-panel">
+    <div class="container">
+        <h1>Панель адміністратора</h1>
+        
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for message in messages %}
+                        <div class="flash-message">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+        
+        <div class="admin-content">
+            <h2>Додати новину</h2>
+            <form method="POST" action="{{ url_for('admin') }}">
+                <div class="form-group">
+                    <label for="title">Заголовок</label>
+                    <input type="text" id="title" name="title" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="content">Зміст</label>
+                    <textarea id="content" name="content" rows="10" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="image_url">URL зображення (необов'язково)</label>
+                    <input type="url" id="image_url" name="image_url">
+                </div>
+                
+                <button type="submit" class="btn">Опублікувати</button>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}
